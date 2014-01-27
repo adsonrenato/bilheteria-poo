@@ -10,6 +10,10 @@ public class Compra {
 	private FormaPagamento tipoPagamento;
 	private Comprador comprador;
         private float valorFinal;
+        
+        private final float PRECO_MIN_DESCONTO = 50.0f;
+        private final int MENOR_DESCONTO = 1;
+        private final int TOTAL_PORCENTAGEM = 1;
 
 	public Compra(Calendar dataCompra, Ingresso ingresso, 
                 FormaPagamento tipoPagamento, Comprador comprador){
@@ -57,14 +61,13 @@ public class Compra {
 
 	private float calcularValorFinal (){
 		float pagar;
-		if(tipoPagamento == FormaPagamento.DINHEIRO){
-			if(ingresso.getSecao().getPreco() > 50.0f)
-				pagar = ingresso.getSecao().getPreco() * 0.98f;
-			else 
-				pagar = ingresso.getSecao().getPreco() - 1;
-		}
+                if((ingresso.getSecao().getPreco() < PRECO_MIN_DESCONTO) && 
+                        (tipoPagamento == FormaPagamento.DINHEIRO)){
+                    pagar = ingresso.getSecao().getPreco() - MENOR_DESCONTO;
+                }
                 else{
-                   pagar = ingresso.getSecao().getPreco();
+                    pagar = ingresso.getSecao().getPreco()*(TOTAL_PORCENTAGEM - 
+                            tipoPagamento.getDesconto());
                 }
                 return pagar;
 		
