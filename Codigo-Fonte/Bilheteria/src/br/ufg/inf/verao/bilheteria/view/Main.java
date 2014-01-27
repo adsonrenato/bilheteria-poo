@@ -2,6 +2,7 @@ package br.ufg.inf.verao.bilheteria.view;
 
 
 import br.ufg.inf.verao.bilheteria.model.*;
+import br.ufg.inf.verao.bilheteria.persistencia.impl.EventoGravacaoHelper;
 import br.ufg.inf.verao.bilheteria.persistencia.impl.IngressoGravacaoHelper;
 import java.util.Calendar;
 /**
@@ -9,7 +10,7 @@ import java.util.Calendar;
  * @author  Gustavo Martins, Jean Lucas, Valéria Maria, Vinícius Caetano.
  */
 
-public class Teste {
+public class Main {
 
 	public static void main(String[] args) {
 
@@ -18,20 +19,23 @@ public class Teste {
 		Calendar data = Calendar.getInstance();
                 Comprador novoComprador = new Comprador("Vinicius","1234",
                             "Endereço", "Telefone" );
-		Evento novoEvento = new Evento("EventoA","Local",
-                                            "Descri��o", data );
-		Ingresso novoIngresso = new Ingresso(123,novoEvento,
+		Evento evento = new Evento("EventoA","Local",
+                                            "Descri��o", data, 3 );
+                
+		Ingresso ingresso = new Ingresso(136,evento,
                                                     novaSecao);
 
-                IngressoGravacaoHelper gerenciaPessoas = new IngressoGravacaoHelper();
-//
-                gerenciaPessoas.gravarObjeto(novoIngresso);
+                IngressoGravacaoHelper gerenciaIngressos = new IngressoGravacaoHelper();
+                EventoGravacaoHelper gerenciaEventos = new EventoGravacaoHelper();
+                
+                gerenciaEventos.gravarObjeto(evento);
 
-                Compra novaCompra = new Compra(data, novoIngresso,novaForma,
-                                                novoComprador);
-		novaCompra.desconto(novaForma, novaSecao);
-		System.out.println("Pagarei: " +novaCompra.desconto(novaForma,
-                                    novaSecao));
+                gerenciaIngressos.gravarObjeto(ingresso);
+
+                //                                novoComprador);
+		//novaCompra.desconto(novaForma, novaSecao);
+		//System.out.println("Pagarei: " +novaCompra.desconto(novaForma,
+                  //                  novaSecao));
 
 	}
 
