@@ -59,7 +59,13 @@ public class IngressoGravacaoHelper implements ServiceHelper<Ingresso>{
         StringBuilder sb = new StringBuilder();
         sb.append(i.getNumIdentificacao());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getEvento());
+        sb.append(i.getEvento().getIdEvento());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getEvento().getNome());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getEvento().getDescricao());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getEvento().getLocal());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getSecao());
         return sb.toString();
