@@ -7,6 +7,13 @@ public class Cliente {
 	private String cpf;
 	private String endereco;
 	private String telefone;
+        private int idCliente;
+
+    
+ 
+       public Cliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 	
 	public Cliente(String nome, String cpf, String endereco, String telefone){
 		this.nome = nome;
@@ -46,4 +53,12 @@ public class Cliente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+        
+        public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 }
