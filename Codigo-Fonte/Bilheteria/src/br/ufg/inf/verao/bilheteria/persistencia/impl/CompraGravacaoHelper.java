@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CompraGravacaoHelper implements ServiceHelper <Compra>{
 
-    private final String ARQUIVO = "eventos.csv";
+    private final String ARQUIVO = "compras.csv";
     private CSVToFile gerenciadorDeArquivo;
     
     public CompraGravacaoHelper(){
@@ -57,13 +57,17 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
     
     private String toLine(Compra i){
         StringBuilder sb = new StringBuilder();
-        sb.append(i.getIdEvento());
+        sb.append(i.getIdCompra());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getNome());
+        sb.append(i.getCliente().getNome());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getDescricao());
+        sb.append(i.getCliente().getCpf());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getLocal());
+        sb.append(i.getIngresso().getNumIdentificacao());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getTipoPagamento());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getValorFinal());
         return sb.toString();
     }
     
@@ -78,6 +82,6 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
 
     @Override
     public boolean remove(Compra compra) {
-        return gerenciadorDeArquivo.removerLinha(compra.getIdEvento());
+        return gerenciadorDeArquivo.removerLinha(compra.getIdCompra());
     }
 }

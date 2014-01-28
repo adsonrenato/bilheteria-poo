@@ -10,14 +10,19 @@ public class Compra {
 	private FormaPagamento tipoPagamento;
 	private Cliente cliente;
         private float valorFinal;
+        private int idCompra;
         
         private final float PRECO_MIN_DESCONTO = 50.0f;
         private final int MENOR_DESCONTO = 1;
         private final int TOTAL_PORCENTAGEM = 1;
         
-
-	public Compra(Calendar dataCompra, Ingresso ingresso, 
+        public Compra(int idCompra){
+            this.idCompra = idCompra;
+        }
+        
+	public Compra(int idCompra, Calendar dataCompra, Ingresso ingresso, 
                 FormaPagamento tipoPagamento, Cliente comprador){
+                this.idCompra = idCompra;
 		this.dataCompra = dataCompra;
 		this.ingresso = ingresso;
                 this.tipoPagamento = tipoPagamento;
@@ -58,7 +63,9 @@ public class Compra {
             return valorFinal;
         }
 
-
+        public int getIdCompra() {
+            return idCompra;
+        }
 
 	private float calcularValorFinal (){
 		float pagar;
