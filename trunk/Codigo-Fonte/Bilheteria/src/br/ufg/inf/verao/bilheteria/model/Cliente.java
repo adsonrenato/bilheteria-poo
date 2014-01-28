@@ -1,14 +1,14 @@
 package br.ufg.inf.verao.bilheteria.model;
 
 
-public class Comprador {
+public class Cliente {
 
 	private String nome;
 	private String cpf;
 	private String endereco;
 	private String telefone;
 	
-	public Comprador(String nome, String cpf, String endereco, String telefone){
+	public Cliente(String nome, String cpf, String endereco, String telefone){
 		this.nome = nome;
 		this.cpf = cpf;
 		this.endereco = endereco;

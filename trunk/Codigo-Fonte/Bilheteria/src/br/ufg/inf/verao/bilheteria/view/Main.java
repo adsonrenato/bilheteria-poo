@@ -12,10 +12,10 @@ public class Main {
 		FormaPagamento novaForma = FormaPagamento.CARTAO;
 		Secao novaSecao = Secao.AREAEXTRAVIP;
 		Calendar data = Calendar.getInstance();
-                Comprador novoComprador = new Comprador("Vinicius","1234",
+                Cliente novoComprador = new Cliente("Vinicius","1234",
                             "Endereço", "Telefone" );
 		Evento evento = new Evento(1, "EventoA","Local",
-                                            "Descri��o", data);
+                                            "Descrição", data);
                 
 		Ingresso ingresso = new Ingresso(136,evento,
                                                     novaSecao);

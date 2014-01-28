@@ -8,19 +8,20 @@ public class Compra {
 	private Calendar dataCompra;
 	private Ingresso ingresso;
 	private FormaPagamento tipoPagamento;
-	private Comprador comprador;
+	private Cliente cliente;
         private float valorFinal;
         
         private final float PRECO_MIN_DESCONTO = 50.0f;
         private final int MENOR_DESCONTO = 1;
         private final int TOTAL_PORCENTAGEM = 1;
+        
 
 	public Compra(Calendar dataCompra, Ingresso ingresso, 
-                FormaPagamento tipoPagamento, Comprador comprador){
+                FormaPagamento tipoPagamento, Cliente comprador){
 		this.dataCompra = dataCompra;
 		this.ingresso = ingresso;
                 this.tipoPagamento = tipoPagamento;
-                this.comprador = comprador;
+                this.cliente = cliente;
 
                 valorFinal = calcularValorFinal();
 	}
@@ -45,12 +46,12 @@ public class Compra {
 		this.tipoPagamento = tipoPagamento;
 	}
 	
-	public Comprador getComprador() {
-		return comprador;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setComprador(Comprador comprador) {
-		this.comprador = comprador;
+	public void setCliente(Cliente comprador) {
+		this.cliente = cliente;
 	}
 
         public float getValorFinal() {
