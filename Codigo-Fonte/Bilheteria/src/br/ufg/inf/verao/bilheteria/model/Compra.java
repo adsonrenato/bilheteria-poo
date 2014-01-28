@@ -53,9 +53,9 @@ public class Compra {
 		this.comprador = comprador;
 	}
 
-    public float getValorFinal() {
-        return valorFinal;
-    }
+        public float getValorFinal() {
+            return valorFinal;
+        }
 
 
 

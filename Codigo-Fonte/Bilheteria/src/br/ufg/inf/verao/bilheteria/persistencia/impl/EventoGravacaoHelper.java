@@ -57,13 +57,13 @@ public class EventoGravacaoHelper implements ServiceHelper <Evento>{
     
     private String toLine(Evento i){
         StringBuilder sb = new StringBuilder();
+        sb.append(i.getIdEvento());
+        sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getNome());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getDescricao());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getLocal());
-        sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getIdEvento());
         return sb.toString();
     }
     
