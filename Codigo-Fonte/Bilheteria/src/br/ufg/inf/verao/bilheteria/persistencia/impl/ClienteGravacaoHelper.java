@@ -74,8 +74,12 @@ public class ClienteGravacaoHelper implements ServiceHelper <Cliente>{
         String[] cliente = line.split(
                 String.valueOf(ServiceHelper.SEPARADOR));
         int id = Integer.parseInt(cliente[0]);
+        String nome = cliente[1];
+        String cpf = cliente[2];
+        String endereco = cliente[3];
+        String telefone = cliente[4];
         
-        Cliente resultado = new Cliente(id);
+        Cliente resultado = new Cliente(id, nome, cpf, endereco, telefone);
         return resultado;
     }
 

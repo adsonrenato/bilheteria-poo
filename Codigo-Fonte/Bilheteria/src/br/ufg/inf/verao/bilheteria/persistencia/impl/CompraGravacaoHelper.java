@@ -65,10 +65,6 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
         StringBuilder sb = new StringBuilder();
         sb.append(i.getIdCompra());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getIngresso().getEvento().getIdEvento());
-        sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getIngresso().getSecao());
-        sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getIngresso().getNumIdentificacao());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getCliente().getIdCliente());
@@ -89,7 +85,6 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
      * @return 
      */
     private Compra getObject(String line){
-        EventoGravacaoHelper gerenciaEventos = new EventoGravacaoHelper();
         IngressoGravacaoHelper gerenciaIngressos = new IngressoGravacaoHelper();
         ClienteGravacaoHelper gerenciaClientes = new ClienteGravacaoHelper();
         
@@ -98,11 +93,11 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
         
         // Define os atributos da compra
         int id = Integer.parseInt(compra[0]);
-        Ingresso ingresso = gerenciaIngressos.getObjetoPorId(Integer.parseInt(compra[3]));
-        Cliente cliente = gerenciaClientes.getObjetoPorId(Integer.parseInt(compra[4]));
-        FormaPagamento pagamento = FormaPagamento.valueOf(compra[5]);
-        float valor = Float.parseFloat(compra[6]);
-        Calendar data = Conversor.stringToCalendar(compra[7]);
+        Ingresso ingresso = gerenciaIngressos.getObjetoPorId(Integer.parseInt(compra[1]));
+        Cliente cliente = gerenciaClientes.getObjetoPorId(Integer.parseInt(compra[2]));
+        FormaPagamento pagamento = FormaPagamento.valueOf(compra[3]);
+        float valor = Float.parseFloat(compra[4]);
+        Calendar data = Conversor.stringToCalendar(compra[5]);
         
         // Instancia a compra
         Compra resultado = new Compra(id, data, ingresso, pagamento, cliente, valor);

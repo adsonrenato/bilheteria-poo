@@ -2,7 +2,9 @@ package br.ufg.inf.verao.bilheteria.persistencia.impl;
 
 import br.ufg.inf.verao.bilheteria.model.Evento;
 import br.ufg.inf.verao.bilheteria.persistencia.base.CSVToFile;
+import br.ufg.inf.verao.bilheteria.utils.Conversor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class EventoGravacaoHelper implements ServiceHelper <Evento>{
@@ -64,6 +66,8 @@ public class EventoGravacaoHelper implements ServiceHelper <Evento>{
         sb.append(i.getDescricao());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getLocal());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(Conversor.calendarToString(i.getData()));
         return sb.toString();
     }
     
@@ -71,8 +75,12 @@ public class EventoGravacaoHelper implements ServiceHelper <Evento>{
         String[] evento = line.split(
                 String.valueOf(ServiceHelper.SEPARADOR));
         int id = Integer.parseInt(evento[0]);
+        String nome = evento[1];
+        String local = evento[2];
+        String descricao = evento[3];
+        Calendar data = Conversor.stringToCalendar(evento[4]);
         
-        Evento resultado = new Evento(id);
+        Evento resultado = new Evento(id, nome, local, descricao, null);
         return resultado;
     }
 
