@@ -4,22 +4,22 @@ import java.util.Calendar;
 
 public class Evento {
 
+    private int idEvento;
     private String nome;
     private String local;
     private String descricao;
     private Calendar data;
-    private int idEvento;
 
     public Evento(int idEvento) {
         this.idEvento = idEvento;
     }
 
-    public Evento(String nome, String local, String descricao, Calendar data, int idEvento) {
+    public Evento(int idEvento, String nome, String local, String descricao, Calendar data) {
+        this.idEvento = idEvento;
         this.nome = nome;
         this.local = local;
         this.descricao = descricao;
         this.data = data;
-        this.idEvento = idEvento;
     }
 
     public String getNome() {
