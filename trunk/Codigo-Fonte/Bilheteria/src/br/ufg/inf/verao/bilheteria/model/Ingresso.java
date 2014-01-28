@@ -1,14 +1,11 @@
 package br.ufg.inf.verao.bilheteria.model;
 
-
-import br.ufg.inf.verao.bilheteria.model.Evento;
-
-
 public class Ingresso {
 
 	private int numIdentificacao;
 	private Evento evento;
 	private Secao secao;
+
 
 	public Ingresso(int numIdentificacao){
 		this.numIdentificacao = numIdentificacao;
@@ -43,4 +40,6 @@ public class Ingresso {
 	public void setSecao(Secao secao) {
 		this.secao = secao;
 	}
+        
+      
 }
