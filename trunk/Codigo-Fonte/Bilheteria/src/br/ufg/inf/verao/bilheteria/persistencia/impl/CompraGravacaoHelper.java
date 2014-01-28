@@ -1,8 +1,14 @@
 package br.ufg.inf.verao.bilheteria.persistencia.impl;
 
+import br.ufg.inf.verao.bilheteria.model.Cliente;
 import br.ufg.inf.verao.bilheteria.model.Compra;
+import br.ufg.inf.verao.bilheteria.model.Evento;
+import br.ufg.inf.verao.bilheteria.model.FormaPagamento;
+import br.ufg.inf.verao.bilheteria.model.Ingresso;
 import br.ufg.inf.verao.bilheteria.persistencia.base.CSVToFile;
+import br.ufg.inf.verao.bilheteria.utils.Conversor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CompraGravacaoHelper implements ServiceHelper <Compra>{
@@ -59,24 +65,47 @@ public class CompraGravacaoHelper implements ServiceHelper <Compra>{
         StringBuilder sb = new StringBuilder();
         sb.append(i.getIdCompra());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getCliente().getNome());
+        sb.append(i.getIngresso().getEvento().getIdEvento());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getCliente().getCpf());
+        sb.append(i.getIngresso().getSecao());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getIngresso().getNumIdentificacao());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(i.getCliente().getIdCliente());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getTipoPagamento());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getValorFinal());
+        sb.append(ServiceHelper.SEPARADOR);
+        sb.append(Conversor.calendarToString(i.getIngresso().getEvento().getData()));
         return sb.toString();
     }
     
+    /**
+     * Método que lê determinada linha (registro) do arquivo e retorna
+     *  a compra cadastrada.
+     * 
+     * @param line
+     * @return 
+     */
     private Compra getObject(String line){
-        String[] compra = line.split(
-                String.valueOf(ServiceHelper.SEPARADOR));
-        int id = Integer.parseInt(compra[0]);
+        EventoGravacaoHelper gerenciaEventos = new EventoGravacaoHelper();
+        IngressoGravacaoHelper gerenciaIngressos = new IngressoGravacaoHelper();
+        ClienteGravacaoHelper gerenciaClientes = new ClienteGravacaoHelper();
         
-        Compra resultado = new Compra(id);
+        // Lê a linha como uma compra
+        String[] compra = line.split(String.valueOf(ServiceHelper.SEPARADOR));
+        
+        // Define os atributos da compra
+        int id = Integer.parseInt(compra[0]);
+        Ingresso ingresso = gerenciaIngressos.getObjetoPorId(Integer.parseInt(compra[3]));
+        Cliente cliente = gerenciaClientes.getObjetoPorId(Integer.parseInt(compra[4]));
+        FormaPagamento pagamento = FormaPagamento.valueOf(compra[5]);
+        float valor = Float.parseFloat(compra[6]);
+        Calendar data = Conversor.stringToCalendar(compra[7]);
+        
+        // Instancia a compra
+        Compra resultado = new Compra(id, data, ingresso, pagamento, cliente, valor);
         return resultado;
     }
 

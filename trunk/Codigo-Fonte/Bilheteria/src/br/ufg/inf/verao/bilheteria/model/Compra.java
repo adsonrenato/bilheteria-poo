@@ -26,9 +26,20 @@ public class Compra {
 		this.dataCompra = dataCompra;
 		this.ingresso = ingresso;
                 this.tipoPagamento = tipoPagamento;
-                this.cliente = cliente;
+                this.cliente = comprador;
 
                 valorFinal = calcularValorFinal();
+	}
+        
+        public Compra(int idCompra, Calendar dataCompra, Ingresso ingresso, 
+                FormaPagamento tipoPagamento, Cliente comprador, float valorFinal){
+                this.idCompra = idCompra;
+		this.dataCompra = dataCompra;
+		this.ingresso = ingresso;
+                this.tipoPagamento = tipoPagamento;
+                this.cliente = comprador;
+
+                this.valorFinal = valorFinal;
 	}
 	
 	public Ingresso getIngresso() {
