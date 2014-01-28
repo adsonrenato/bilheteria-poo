@@ -32,7 +32,7 @@ public class Main {
                 gerenciaCompras.gravarObjeto(compra);
                 gerenciaClientes.gravarObjeto(novoComprador);
                 
-                List x = gerenciaCompras.getTodosObjetos();
+                List compras = gerenciaCompras.getTodosObjetos();
                 System.out.println("oi");
                 //                                novoComprador);
 		//novaCompra.desconto(novaForma, novaSecao);

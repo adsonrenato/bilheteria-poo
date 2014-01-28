@@ -1,6 +1,8 @@
 package br.ufg.inf.verao.bilheteria.persistencia.impl;
 
+import br.ufg.inf.verao.bilheteria.model.Evento;
 import br.ufg.inf.verao.bilheteria.model.Ingresso;
+import br.ufg.inf.verao.bilheteria.model.Secao;
 import br.ufg.inf.verao.bilheteria.persistencia.base.CSVToFile;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,22 +63,20 @@ public class IngressoGravacaoHelper implements ServiceHelper<Ingresso>{
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getEvento().getIdEvento());
         sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getEvento().getNome());
-        sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getEvento().getDescricao());
-        sb.append(ServiceHelper.SEPARADOR);
-        sb.append(i.getEvento().getLocal());
-        sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getSecao());
         return sb.toString();
     }
     
     private Ingresso getObject(String line){
-        String[] ingresso = line.split(
-                String.valueOf(ServiceHelper.SEPARADOR));
-        int id = Integer.parseInt(ingresso[0]);
+        EventoGravacaoHelper gerenciaEventos = new EventoGravacaoHelper();
         
-        Ingresso resultado = new Ingresso(id);
+        String[] ingresso = line.split(String.valueOf(ServiceHelper.SEPARADOR));
+        
+        int id = Integer.parseInt(ingresso[0]);
+        Evento evento = gerenciaEventos.getObjetoPorId(Integer.parseInt(ingresso[1]));
+        Secao secao = Secao.valueOf(ingresso[2]);
+        
+        Ingresso resultado = new Ingresso(id, evento, secao);
         return resultado;
     }
 
