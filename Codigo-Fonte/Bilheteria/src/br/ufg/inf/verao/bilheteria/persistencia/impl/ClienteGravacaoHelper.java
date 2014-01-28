@@ -58,6 +58,8 @@ public class ClienteGravacaoHelper implements ServiceHelper <Cliente>{
     private String toLine(Cliente i){
         StringBuilder sb = new StringBuilder();
         
+        sb.append(i.getIdCliente());
+        sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getCpf());
         sb.append(ServiceHelper.SEPARADOR);
         sb.append(i.getNome());
