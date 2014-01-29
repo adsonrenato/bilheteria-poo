@@ -18,9 +18,8 @@ public class Main {
             Scanner entrada = new Scanner(System.in);
             int opcao = entrada.nextInt();
             do{
-                switch (opcao){
-                    exibirMenu();        
-                }
+                exibirMenu();    
+                switch (opcao){   
                     case 1:
                         cadastrarCliente();
                         break;
@@ -48,8 +47,8 @@ public class Main {
                     case 9:
                         importarListaClientes();
                         
-                }while(opcao != 10);
-        }
+                }
+        } while(opcao != 10);
             
             public void exibirMenu(){
                 System.out.println("***BILHETERIA***");
