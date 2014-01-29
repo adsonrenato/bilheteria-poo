@@ -79,6 +79,16 @@ public class IngressoGravacaoHelper implements ServiceHelper<Ingresso>{
         Ingresso resultado = new Ingresso(id, evento, secao);
         return resultado;
     }
+    
+    public int gerarID(){
+        int newId = 0;
+        
+        while(getObjetoPorId(newId) != null){
+            newId++;
+        }
+        
+        return newId;
+    }
 
     @Override
     public boolean remove(Ingresso ingresso) {

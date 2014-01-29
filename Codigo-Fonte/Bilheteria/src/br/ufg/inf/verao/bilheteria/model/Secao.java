@@ -4,8 +4,7 @@ package br.ufg.inf.verao.bilheteria.model;
 public enum Secao {
 
 	AREAVIP(40.0f),
-	AREAEXTRAVIP(100.0f),
-	AREACAMAROTEPRIME(399.99f);
+	AREAEXTRAVIP(100.0f);
 	
 	//campo
 	private final float preco;
