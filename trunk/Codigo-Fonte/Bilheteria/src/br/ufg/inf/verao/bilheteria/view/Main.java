@@ -13,7 +13,11 @@ import java.util.Scanner;
  * @author  Gustavo Martins, Jean Lucas, Valéria Maria, Vinícius Caetano.
  */
 public class Main {
-	public static void main(String[] args) {
+    
+    private Cliente cliente;
+    private Ingresso ingresso;
+    private Evento evento;
+    public static void main(String[] args) {
             
             Scanner entrada = new Scanner(System.in);
             int opcao = entrada.nextInt();
@@ -30,27 +34,28 @@ public class Main {
                         realizarCompra();
                         break;
                     case 4:
-                        excluirCompra();
+                        //excluirCompra();
                         break;
                     case 5:
-                        excluirCliente();
+                        //excluirCliente();
                         break;
                     case 6:
-                        qtdIngressosVendidos();
+                        //qtdIngressosVendidos();
                         break;
                     case 7:
-                        importarListaIngressos();
+                        //importarListaIngressos();
                         break;
                     case 8:
-                        importarListaCompras();
+                        //importarListaCompras();
                         break;
                     case 9:
-                        importarListaClientes();
+                        //importarListaClientes();
                         
                 }
         } while(opcao != 10);
+    }
             
-            public void exibirMenu(){
+            public static void exibirMenu(){
                 System.out.println("***BILHETERIA***");
                 System.out.println(">Digite a opção desejada:");
                 System.out.println("1 - Cadastro de cliente;");
@@ -65,7 +70,7 @@ public class Main {
                 System.out.println("10 - Sair.");
             }
             
-            public void cadastrarCliente(){
+            public static void cadastrarCliente(){
                 
                 Scanner entrada = new Scanner(System.in);
                 
@@ -87,9 +92,11 @@ public class Main {
                                             endereco, cep, telefone);
                 ClienteGravacaoHelper gravaCliente = 
                         new ClienteGravacaoHelper();
+                
+                gravaCliente.gravarObjeto(cliente);
             }
             
-            public void cadastrarEvento(){
+            public static void cadastrarEvento(){
                 
                 Scanner entrada = new Scanner(System.in);
                 
@@ -109,25 +116,78 @@ public class Main {
                 Evento evento = new Evento(idEvento, nome,local,descricao,data);
 
                 EventoGravacaoHelper gravaEvento = new EventoGravacaoHelper();
+                
+                gravaEvento.gravarObjeto(evento);
             }
              
-            public void realizarCompra(){
+            public static void realizarCompra(){
+                EventoGravacaoHelper gravaEvento = new EventoGravacaoHelper();
+                ClienteGravacaoHelper gravaCliente = new ClienteGravacaoHelper();
+                IngressoGravacaoHelper gravaIngresso = new IngressoGravacaoHelper();
+                CompraGravacaoHelper gravaCompra = new CompraGravacaoHelper();
+                Ingresso ingresso;
                 Scanner entrada = new Scanner(System.in);
 
-                //Calendar data = Calendar.getInstance();
+                Calendar data = Calendar.getInstance();
                 System.out.println("**REALIZAR COMPRA**");
-                System.out.println("Id da compra: ");
-                int idCompra = entrada.nextInt();
-                System.out.println("Id do evento: ");
-                int idEvento = entrada.nextInt();
+                int idIngresso = gravaIngresso.gerarID();
                 System.out.println("Id do cliente: ");
                 int idCliente = entrada.nextInt();
+                System.out.println("Id do evento: ");
+                int idEvento = entrada.nextInt();
                 System.out.println("Tipo de seção "
-                        + "(AREAVIP,AREAEXTRAVIP ou AREACAMAROTEPRIME");
-                System.out.println("Forma de pagamento (Dinheiro ou Cartão)");
-                Compra compra = new Compra(idCompra, data, idEvento, idCliente,
-                qtdIngressos, opcaoSecao, opcaoPag);
-
+                        + "(AREAVIP(1),AREAEXTRAVIP(2)");
+                int secao = entrada.nextInt();
+                if(secao == 1){
+                    ingresso = new Ingresso(idIngresso, gravaEvento.getObjetoPorId(idEvento), Secao.AREAVIP);
+                gravaIngresso.gravarObjeto(ingresso);
+                }else{
+                    ingresso = new Ingresso(idIngresso, 
+                    gravaEvento.getObjetoPorId(idEvento), Secao.AREAEXTRAVIP);
+                    gravaIngresso.gravarObjeto(ingresso); 
+                }
+                
+                System.out.println("Forma de pagamento (Cartão(1) ou Dinheiro (2)");
+                int formaPag = entrada.nextInt();
+                Compra compra;
+                
+                if(formaPag == 1){
+                compra = new Compra(gravaCompra.gerarID(), data, ingresso, 
+                        FormaPagamento.CARTAO, gravaCliente.getObjetoPorId(idCliente));
+                } else {
+                compra = new Compra(gravaCompra.gerarID(), data, ingresso, 
+                    FormaPagamento.DINHEIRO, gravaCliente.getObjetoPorId(idCliente));
+                }
+                
+                gravaCompra.gravarObjeto(compra);
+                
             }
+//            
+//            public static void excluirCompra(){
+//                
+//                CompraGravacaoHelper gerenciaCompra = new CompraGravacaoHelper();
+//                Scanner entrada = new Scanner(System.in);
+//                System.out.print("Id da compra: ");
+//                int idCompra = entrada.nextInt();
+//                gerenciaCompra.remove(gerenciaCompra.getObjetoPorId(idCompra));
+//                
+//            }
+//            
+//            public void qtdIngressosVendidos(){
+//
+//            }
+//
+//            private static void importarListaIngressos() {
+//                
+//            }
+//
+//            private static void importarListaCompras() {
+//                
+//            }
+//
+//            private static void importarListaClientes() {
+//                
+//            }
 }
-// SimpleDateFormat
+
+
