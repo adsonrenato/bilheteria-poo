@@ -20,9 +20,10 @@ public class Main {
     public static void main(String[] args) {
             
             Scanner entrada = new Scanner(System.in);
-            int opcao = entrada.nextInt();
+            int opcao;
             do{
-                exibirMenu();    
+                exibirMenu();
+                opcao = entrada.nextInt();
                 switch (opcao){   
                     case 1:
                         cadastrarCliente();
@@ -57,7 +58,6 @@ public class Main {
             
             public static void exibirMenu(){
                 System.out.println("***BILHETERIA***");
-                System.out.println(">Digite a opção desejada:");
                 System.out.println("1 - Cadastro de cliente;");
                 System.out.println("2 - Cadastro de evento;");
                 System.out.println("3 - Realizar compra;");
@@ -68,6 +68,7 @@ public class Main {
                 System.out.println("8 - Importar lista de compras");
                 System.out.println("9 - Importar lista de clientes");
                 System.out.println("10 - Sair.");
+                System.out.println(">Digite a opção desejada:");
             }
             
             public static void cadastrarCliente(){
