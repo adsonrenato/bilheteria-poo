@@ -77,9 +77,10 @@ public class ClienteGravacaoHelper implements ServiceHelper <Cliente>{
         String nome = cliente[1];
         String cpf = cliente[2];
         String endereco = cliente[3];
-        String telefone = cliente[4];
+        String cep = cliente[4];
+        String telefone = cliente[5];
         
-        Cliente resultado = new Cliente(id, nome, cpf, endereco, telefone);
+        Cliente resultado = new Cliente(id, nome, cpf, endereco, cep, telefone);
         return resultado;
     }
 
